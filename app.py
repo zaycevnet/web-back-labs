@@ -9,6 +9,7 @@ def web():
                 <h1>web-сервер на flask</h1>
                 <p><a href="/author">/author</a></p>
                 <p><a href="/labl/oak">Дуууб</a></p>
+                <p><a href="/lab1/counter">Счетчик</a></p>
             </body>
         </html>"""
 
@@ -38,6 +39,21 @@ def oak():
     <body>
     <h1>Дуууб</h1>
     <img src="''' + path +'''">
+    </body>
+</html>
+'''
+
+count = 0  # Инициализируем счетчик вне функции
+
+@app.route('/lab1/counter')
+def counter():
+    global count
+    count += 1
+    return '''
+<!doctype html>
+<html>
+    <body>
+    Сколько раз вы сюда заходили: ''' + str(count) + '''
     </body>
 </html>
 '''
