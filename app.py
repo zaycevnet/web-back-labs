@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, redirect
 app = Flask(__name__)
 @app.route("/")
 @app.route("/web")
@@ -43,7 +43,7 @@ def oak():
 </html>
 '''
 
-count = 0  # Инициализируем счетчик вне функции
+count = 0  # Инициализируем счетчик вне функции тк ошибка 500
 
 @app.route('/lab1/counter')
 def counter():
@@ -57,3 +57,6 @@ def counter():
     </body>
 </html>
 '''
+@app.route("/info")
+def info():
+    return redirect ("/author")
