@@ -192,3 +192,27 @@ def error_405():
 @app.route("/error/418")
 def error_418():
     return "418", 418
+
+@app.route("/error/500")
+def error_500():
+    # Намеренная ошибка
+    return 1 / 0
+
+@app.errorhandler(500)
+def internal_server_error(err):
+    css_path = url_for("static", filename="lab1.css")
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Ошибка 500 - Внутренняя ошибка сервера</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="''' + css_path + '''">
+    </head>
+    <body class="error-page">
+        <h1>Ошибка 500 - Внутренняя ошибка сервера</h1>
+        <p>Ой.</p>
+        <p><a href="/">Вернуться на главную страницу</a></p>
+    </body>
+</html>
+''', 500
