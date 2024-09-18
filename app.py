@@ -6,22 +6,23 @@ def not_found (err):
     return "Нет такой страницы =/", 404
 
 @app.route("/")
-@app.route("/web")
+@app.route("/lab1/web")
 def web():
     return """<!doctype html>
         <html>
             <body>
                 <h1>web-сервер на flask</h1>
-                <p><a href="/author">/author</a></p>
+                <p><a href="/lab1/author">/author</a></p>
                 <p><a href="/labl/oak">Дуууб</a></p>
                 <p><a href="/lab1/counter">Счетчик</a></p>
             </body>
-        </html>""", 200, {
-            "X-Server": "sample",
-            'Content-Type': 'text/plain; charset=utf-8'
-            }
+        # </html>""" 
+        # , 200, {
+        #     "X-Server": "sample",
+        #     'Content-Type': 'text/plain; charset=utf-8'
+        #     }
 
-@app.route("/author")
+@app.route("/lab1/author")
 def author():
     name = "010595140"
     group = "ФБИ-21"
@@ -72,9 +73,9 @@ def counter():
 </html>
 '''
 
-@app.route("/info")
+@app.route("/lab1/info")
 def info():
-    return redirect ("/author")
+    return redirect ("/lab1/author")
 
 @app.route("/lab1/created")
 def created():
