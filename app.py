@@ -216,3 +216,29 @@ def internal_server_error(err):
     </body>
 </html>
 ''', 500
+
+@app.route("/lab1/story")
+def story():
+    css_path = url_for("static", filename="lab1.css")
+    img_path = url_for("static", filename="story_image.jpg") 
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Фрагмент из романа Замятина "Мы"</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="''' + css_path + '''">
+    </head>
+    <body>
+        <h1>Фрагмент из романа "Мы"</h1>
+        <p>"Да, конечно, это я, я! Вчера это было так же ясно, как теперь ясно, что передо мной — этот лист бумаги. Тогда почему я сказал — «он»? И вообще, о чем я вчера говорил? Или — говорил?</p>
+        <p>Сквозь головокружение, как в тумане, тускло светилось: она ведь говорила о любви. А я... Или не говорил? Нет, это не так. Я ясно помню: говорил, но не помню, о чем."</p>
+        <p>Новый абзац</p>
+        <img src="''' + img_path + '''" alt="Фрагмент из романа Мы">
+    </body>
+</html>
+''', 200, {
+        'Content-Language': 'ru',  # Язык страницы
+        'X-Developer': 'Student 010595140',  # Нестандартный заголовок
+        'X-Course': 'Web Programming, Part 2'  # Нестандартный заголовок
+    }
