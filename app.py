@@ -25,18 +25,36 @@ def not_found(err):
 @app.route("/")
 @app.route("/lab1/web")
 def web():
-    return """<!doctype html>
-        <html>
-            <body>
-                <h1>web-сервер на flask</h1>
-                <li><a href="/lab1/web">Первая лабораторная (web)</a></li>
-                <li><a href="/lab1/author">Информация об авторе</a></li>
-                <li><a href="/labl/oak">Изображение дуба</a></li>
-                <li><a href="/lab1/counter">Счётчик</a></li>
-                <li><a href="/lab1/reset">Очистить счётчик</a></li>
-                <li><a href="/lab1">Описание Flask (Лабораторная 1)</a></li>
-            </body>
-        # </html>""" 
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Лабораторная 1</title>
+        <link rel="stylesheet" type="text/css" href="''' + url_for("static", filename="lab1.css") + '''">
+    </head>
+    <body>
+        <h1>Лабораторная 1</h1>
+        <p>Flask — фреймворк для создания веб-приложений на языке программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2. Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений, сознательно предоставляющих лишь самые базовые возможности.</p>
+        
+        <h2>Список роутов</h2>
+        <ul>
+            <li><a href="/">Главная страница</a></li>
+            <li><a href="/lab1">Описание Flask (Лабораторная 1)</a></li>
+            <li><a href="/lab1/web">Первая лабораторная (web)</a></li>
+            <li><a href="/lab1/author">Информация об авторе</a></li>
+            <li><a href="/labl/oak">Изображение дуба</a></li>
+            <li><a href="/lab1/counter">Счётчик</a></li>
+            <li><a href="/lab1/reset">Очистить счётчик</a></li>
+            <li><a href="/lab1/info">Перенаправление на автора</a></li>
+            <li><a href="/lab1/created">Создано успешно</a></li>
+            <li><a href="/lab1/story">Фрагмент из романа "Мы"</a></li>
+        </ul>
+        
+        <p><a href="/">Вернуться на главную</a></p>
+    </body>
+</html>
+'''
+
         # , 200, {
         #     "X-Server": "sample",
         #     'Content-Type': 'text/plain; charset=utf-8'
