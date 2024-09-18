@@ -2,8 +2,25 @@ from flask import Flask, url_for, redirect
 app = Flask(__name__)
 
 @app.errorhandler(404)
-def not_found (err):
-    return "Нет такой страницы =/", 404
+def not_found(err):
+    css_path = url_for("static", filename="lab1.css")
+    img_path = url_for("static", filename="404_image.png")  # Путь к изображению в папке static
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Ошибка 404 - Страница не найдена</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="''' + css_path + '''">
+    </head>
+    <body class="error-page">
+        <h1>Ошибка 404 - Страница не найдена</h1>
+        <p>Ой!</p>
+        <img src="''' + img_path + '''" alt="404 ошибка">
+        <p><a href="/">Вернуться на главную страницу</a></p>
+    </body>
+</html>
+''', 404
 
 @app.route("/")
 @app.route("/lab1/web")
