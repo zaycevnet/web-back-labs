@@ -40,16 +40,21 @@ def author():
 
 @app.route('/labl/oak')
 def oak():
-    path = url_for ("static", filename="oak.jpg")
+    path = url_for("static", filename="oak.jpg")
+    css_path = url_for("static", filename="lab1.css")
     return '''
 <!doctype html>
 <html>
     <body>
     <h1>Дуууб</h1>
-    <img src="''' + path +'''">
+    <link rel="stylesheet" type="text/css" href="''' + css_path + '''">
+    <img src="''' + path + '''">
     </body>
 </html>
 '''
+
+def new_func():
+    css_path = url_for("static", filename="lab1.css")
 
 count = 0  # Инициализируем счетчик вне функции тк ошибка 500
 
