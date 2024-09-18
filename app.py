@@ -151,3 +151,27 @@ def lab1():
     </body>
 </html>
 '''
+
+@app.route("/error/400")
+def error_400():
+    return "400 Bad Request: Некорректный запрос", 400
+
+@app.route("/error/401")
+def error_401():
+    return "401 Unauthorized: Неавторизован", 401
+
+@app.route("/error/402")
+def error_402():
+    return "402 Payment Required: Требуется оплата", 402
+
+@app.route("/error/403")
+def error_403():
+    return "403 Forbidden: Доступ запрещён", 403
+
+@app.route("/error/405")
+def error_405():
+    return "405 Method Not Allowed: Метод не разрешён", 405
+
+@app.route("/error/418")
+def error_418():
+    return "418", 418
