@@ -103,3 +103,32 @@ def reset_counter():
     </body>
 </html>
 '''
+
+@app.route("/")
+@app.route("/index")
+def index():
+    css_path = url_for("static", filename="lab1.css")
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>НГТУ, ФБ, Лабораторные работы</title>
+        <link rel="stylesheet" type="text/css" href="''' + css_path + '''">
+    </head>
+    <body>
+        <header>
+            <h1>НГТУ, ФБ, WEB-программирование, часть 2. Список лабораторных</h1>
+        </header>
+        <nav>
+                <li><a href="/lab1/web">Первая лабораторная</a></li>
+        </nav>
+        <footer>
+            <p>ФИО: 010595140</p>
+            <p>Группа: ФБИ-21</p>
+            <p>Курс: 3</p>
+            <p>Год: 2024</p>
+        </footer>
+    </body>
+</html>
+'''
+
