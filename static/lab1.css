@@ -1,0 +1,72 @@
+body {
+    background-color: #f0f8ff; /* Цвет фона страницы */
+    color: #333; /* Цвет текста */
+    font-family: Arial, sans-serif; /* Шрифт */
+}
+
+h1 {
+    color: #2e8b57; /* Цвет заголовка */
+}
+
+img {
+    width: 500px; /* Ширина изображения */
+    height: auto; /* Высота изображения автоматически подстраивается */
+    border: 2px solid #000; /* Рамка вокруг изображения */
+}
+
+header {
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+ nav { /*/lab1/web">Первая лабораторная */
+    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+footer { /*на самой главной /index*/
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+    position: absolute; /*относительно области просмотра*/
+    width: 100%;
+    bottom: 0; /*размещает элемент на самом нижнем краю окна браузера*/
+}
+
+/* Стили для страницы ошибки 404 */
+.error-page {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    padding-top: 50px; /*внутренний отступ внутри элемента*/
+}
+
+.error-page h1 {
+    color: #ff6347;
+}
+
+.error-page p {
+    font-size: 20px;
+}
+
+.error-page img {
+    width: 400px;
+    height: auto;
+    margin-top: 20px; /*внешний отступ */
+}
+
+.error-page a {
+    display: inline-block;
+    margin-top: 30px; /* внешний отступ */
+    padding: 10px 20px; /*внутренний отступ, сверху/снизу и слева/справа*/
+    background-color: #ff6347;
+    color: white;
+    text-decoration: none; /*для удаления любых декоративных элементов текста, таких как подчеркивание, надчеркивание или перечеркивание.*/
+    border-radius: 5px; /*закругляет углы блока со ссылкой*/
+}
+
+.error-page a:hover {
+    background-color: #ff4500;
+}
