@@ -1,6 +1,6 @@
-from flask import Flask, url_for, redirect
+from flask import Flask, url_for, redirect 
 app = Flask(__name__)
-
+#генерирует URL-адреса для маршрутов, для перенаправления 
 @app.errorhandler(404)
 def not_found(err):
     css_path = url_for("static", filename="lab1.css")
@@ -22,6 +22,8 @@ def not_found(err):
 </html>
 ''', 404
 
+ # rel="stylesheet" этот файл — таблица стилей, Flask сгенерирует полный URL для файла lab1.css из каталога static
+
 @app.route("/")
 @app.route("/lab1/web")
 def web():
@@ -29,7 +31,7 @@ def web():
 <!doctype html>
 <html>
     <head>
-        <title>Лабораторная 1</title>
+        <title>Лабораторная 1</title> 
         <link rel="stylesheet" type="text/css" href="''' + url_for("static", filename="lab1.css") + '''">
     </head>
     <body>
@@ -78,9 +80,9 @@ def author():
         </html>"""
 
 @app.route('/labl/oak')
-def oak():
-    path = url_for("static", filename="oak.jpg")
-    css_path = url_for("static", filename="lab1.css")
+def oak(): #файлы из папки static
+    path = url_for("static", filename="oak.jpg") #URL для изображения
+    css_path = url_for("static", filename="lab1.css") #URL для подключения CSS-файла
     return '''
 <!doctype html>
 <html>
@@ -130,7 +132,7 @@ def created():
 
 @app.route('/lab1/reset')
 def reset_counter():
-    global count
+    global count #тк используется между различными HTTP-запросами
     count = 0
     return '''
 <!doctype html>
@@ -256,7 +258,7 @@ def story():
     </body>
 </html>
 ''', 200, {
-        'Content-Language': 'ru',  # Язык страницы
+        'Content-Language': 'ru',  # Язык страницы, стандартный заголовок
         'X-Developer': 'Student 010595140',  # Нестандартный заголовок
         'X-Course': 'Web Programming, Part 2'  # Нестандартный заголовок
     }
