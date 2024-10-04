@@ -262,3 +262,12 @@ def story():
         'X-Developer': 'Student 010595140',  # Нестандартный заголовок
         'X-Course': 'Web Programming, Part 2'  # Нестандартный заголовок
     }
+
+
+@app.route("/lab2/a/")
+def a():
+    return 'слеш'
+
+@app.route("/lab2/a")
+def a2():
+    return 'без слеша'
