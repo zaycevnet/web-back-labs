@@ -310,4 +310,5 @@ def add_flower(name):
 
 @app.route("/lab2/example")
 def example():
-    return render_template ('example.html')
+    name  = '010595140' # student — переменная, используемая в коде на питоне, name — переменная в шаблоне. Это две разные сущности.
+    return render_template ('example.html', name=name)
