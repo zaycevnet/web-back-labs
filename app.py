@@ -278,9 +278,28 @@ flower_list = ['роза', 'тюльпан', 'незабудка', 'ромашк
 def flowers(flower_id):
     # return "id=" + str(flower_id)
     if flower_id >= len(flower_list): #длина кортежа в данный момент равна 3, нумерация с 0
-        return "такого цветка нет", 404
+        return '''
+        <!doctype html>
+        <html>    
+            <body>
+                <h1>Ошибка 404</h1>
+                <p>Такого цветка нет</p>
+                <a href="/lab2/flowers">Посмотреть все цветы</a>
+            </body>
+        </html>
+        ''', 404
     else:
-        return "цветок: " + flower_list[flower_id]
+        flower_name = flower_list[flower_id]
+        return f'''
+        <!doctype html>
+        <html>    
+            <body>
+                <h1>Информация о цветке</h1>
+                <p>Название цветка: {flower_name}</p>
+                <a href="/lab2/flowers">Посмотреть все цветы</a>
+            </body>
+        </html>
+        '''
     
 @app.route("/lab2/add_flower/<name>") #по умолчанию для него задаётся тип string (строка)
 def add_flower(name):
@@ -307,10 +326,69 @@ def add_flower(name):
             </body>
     </html>
     '''
+@app.route("/lab2/add_flower/")
+def add_flower_no_name():
+    return '''
+    <!doctype html>
+    <html>    
+        <body>
+            <h1>Ошибка 400</h1>
+            <p>Вы не задали имя цветка</p>
+            <a href="/lab2/flowers">Посмотреть все цветы</a>
+        </body>
+    </html>
+    ''', 400
+
+# Обработчик для вывода всех цветов
+@app.route("/lab2/flowers")
+def show_flowers():
+    return f'''
+    <!doctype html>
+    <html>    
+        <body>
+            <h1>Список всех цветов</h1>
+            <p>Всего цветов: {len(flower_list)}</p>
+            <ul>
+                {''.join([f'<li>{flower}</li>' for flower in flower_list])}
+            </ul>
+            <a href="/lab2/add_flower/">Добавить цветок</a>
+        </body>
+    </html>
+    '''
+@app.route("/lab2/clear_flowers")
+def clear_flowers():
+    flower_list.clear()  # Очищаем список полностью
+    return '''
+    <!doctype html>
+    <html>    
+        <body>
+            <h1>Список цветов очищен</h1>
+            <a href="/lab2/flowers">Посмотреть все цветы</a>
+        </body>
+    </html>
+    '''
+
+
 
 @app.route("/lab2/example")
 def example():
     name  = '010595140' # student — переменная, используемая в коде на питоне, name — переменная в шаблоне. Это две разные сущности.
     kurs = '3'
     nomer_lab = '2'
-    return render_template ('example.html', name=name, kurs=kurs, nomer_lab=nomer_lab)
+    fruits = [
+        {'name' : 'яблоки', 'price' : 100},
+        {'name' : 'груши', 'price' : 120},
+        {'name' : 'апельсины', 'price' : 80},
+        {'name' : 'мандарины', 'price' : 95},
+        {'name' : 'манго', 'price' : 321}
+        ]
+    return render_template ('example.html', name=name, kurs=kurs, nomer_lab=nomer_lab, fruits=fruits)
+
+@app.route('/lab2/')
+def lab2():
+    return render_template('lab2.html')
+
+@app.route('/lab2/filters')
+def filters():
+    phrase ="О <b>сколько</b> <u>там</u> <i>открытий</i> чудных..."
+    return render_template('filter.html', phrase = phrase)
