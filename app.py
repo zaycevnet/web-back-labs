@@ -447,3 +447,42 @@ books = [
 @app.route('/lab2/books')
 def show_books():
     return render_template('books.html', books=books)
+
+#Задание 4
+# Список объектов
+objects = [
+    {
+        'name': 'Клубника',
+        'description': 'Вкусная и сочная летняя ягода.',
+        'image': 'strawberry.jpg'
+    },
+    {
+        'name': 'Машина',
+        'description': 'Скоростной автомобиль спортивного класса.',
+        'image': 'car.jpg'
+    },
+    {
+        'name': 'Котик',
+        'description': 'Милый домашний питомец.',
+        'image': 'cat.jpg'
+    },
+    {
+        'name': 'Стул',
+        'description': 'Удобная мебель для сидения.',
+        'image': 'chair.jpg'
+    },
+    {
+        'name': 'Собака',
+        'description': 'Преданный друг человека.',
+        'image': 'dog.jpg'
+    }
+]
+
+# Маршрут для отображения объектов
+@app.route('/lab2/objects')
+def show_objects():
+    # Генерация путей к изображениям внутри маршрута
+    for obj in objects:
+        obj['image'] = url_for('static', filename=obj['image'])
+
+    return render_template('objects.html', objects=objects)
