@@ -428,3 +428,22 @@ def calc_redirect(a):
     # Перенаправление на адрес /lab2/calc/a/1
     return redirect(f'/lab2/calc/{a}/1')
 
+#Задание 3
+# Список книг
+books = [
+    {'author': 'Фёдор Достоевский', 'title': 'Преступление и наказание', 'genre': 'Роман', 'pages': 671},
+    {'author': 'Лев Толстой', 'title': 'Война и мир', 'genre': 'Роман', 'pages': 1225},
+    {'author': 'Джордж Оруэлл', 'title': '1984', 'genre': 'Антиутопия', 'pages': 328},
+    {'author': 'Михаил Булгаков', 'title': 'Мастер и Маргарита', 'genre': 'Фантастика', 'pages': 480},
+    {'author': 'Александр Пушкин', 'title': 'Евгений Онегин', 'genre': 'Поэма', 'pages': 320},
+    {'author': 'Даниэль Дефо', 'title': 'Робинзон Крузо', 'genre': 'Приключения', 'pages': 256},
+    {'author': 'Джек Лондон', 'title': 'Мартин Иден', 'genre': 'Роман', 'pages': 431},
+    {'author': 'Артур Конан Дойл', 'title': 'Шерлок Холмс', 'genre': 'Детектив', 'pages': 302},
+    {'author': 'Рей Брэдбери', 'title': '451 градус по Фаренгейту', 'genre': 'Фантастика', 'pages': 249},
+    {'author': 'Габриэль', 'title': 'Сто лет одиночества', 'genre': 'Магический реализм', 'pages': 417}
+]
+
+# Маршрут для вывода списка книг
+@app.route('/lab2/books')
+def show_books():
+    return render_template('books.html', books=books)
