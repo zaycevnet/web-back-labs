@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h1>Список объектов</h1>
+    <div class="objects-container">
+        {% for obj in objects %}
+        <div class="object">
+            <h2>{{ obj.name }}</h2>
+            <img src="{{ obj.image }}" alt="{{ obj.name }}">
+            <p>{{ obj.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

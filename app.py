@@ -486,3 +486,4 @@ def show_objects():
         obj['image'] = url_for('static', filename=obj['image'])
 
     return render_template('objects.html', objects=objects)
+
