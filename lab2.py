@@ -138,7 +138,7 @@ def example():
 #Flask ищет файл example.html в папке templates
 @lab2.route('/lab2/')
 def lab():
-    return render_template('lab2.html')
+    return render_template('lab2/lab2.html')
 
 
 @lab2.route('/lab2/filters')
@@ -203,7 +203,7 @@ books = [
 # Маршрут для вывода списка книг
 @lab2.route('/lab2/books')
 def show_books():
-    return render_template('books.html', books=books)
+    return render_template('lab2/books.html', books=books)
 
 
 #Задание 4
@@ -242,9 +242,9 @@ objects = [
 def show_objects():
     # Генерация путей к изображениям внутри маршрута
     for obj in objects:
-        obj['image'] = url_for('static', filename=obj['image'])
+        obj['image'] = url_for('static/lab1', filename=obj['image'])
 
-    return render_template('objects.html', objects=objects)
+    return render_template('lab2/objects.html', objects=objects)
 
 
 #В квадратных скобках [] указывается ключ, по которому нужно получить соответствующее значение
