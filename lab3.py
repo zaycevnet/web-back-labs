@@ -117,3 +117,61 @@ def settings():
     # Рендерим шаблон с текущими значениями
     resp = make_response(render_template('lab3/settings.html', color=color, background_color=background_color, font_size=font_size))
     return resp
+
+@lab3.route('/lab3/trail_ticket')
+def trail_ticket():
+    return render_template('lab3/trail_ticket.html')
+
+@lab3.route('/lab3/ticket')
+def ticket():
+    passenger_name = request.args.get('passenger_name')
+    passenger_type = request.args.get('passenger_type')
+    berth_type = request.args.get('berth_type')
+    luggage = request.args.get('luggage')
+    insurance = request.args.get('insurance') 
+    passenger_age_str = request.args.get('passenger_age')  
+    departure_point = request.args.get('departure_point')
+    destination = request.args.get('destination')
+    travel_date = request.args.get('travel_date')
+
+    # Проверяем, что возраст не пуст и является числом
+    if not passenger_age_str or not passenger_age_str.isdigit():
+        return "Ошибка: Возраст должен быть числом", 400
+
+    # Преобразуем возраст в целое число
+    passenger_age = int(passenger_age_str)
+
+    # Валидация возраста
+    if not (1 <= passenger_age <= 120):
+        return "Ошибка: Возраст должен быть от 1 до 120 лет", 400
+
+    # Расчет стоимости
+    if passenger_type == 'child' or passenger_age < 18:
+        ticket_price = 700  # Детский билет
+    else:
+        ticket_price = 1000  # Взрослый билет
+
+    # Доплата за нижнюю или нижнюю боковую полку
+    if berth_type in ['lower', 'lower_side']:
+        ticket_price += 100
+
+    # Доплата за багаж
+    if luggage == 'on':
+        ticket_price += 250
+
+    # Доплата за страховку
+    if insurance == 'on':
+        ticket_price += 150
+
+    # Отображение страницы с билетом
+    return render_template('lab3/ticket.html',
+                           passenger_name=passenger_name,
+                           passenger_type=passenger_type,
+                           berth_type=berth_type,
+                           luggage=luggage,
+                           insurance=insurance,
+                           passenger_age=passenger_age,
+                           departure_point=departure_point,
+                           destination=destination,
+                           travel_date=travel_date,
+                           ticket_price=ticket_price)
