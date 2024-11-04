@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request,  make_response, redirect
 lab3 = Blueprint('lab3', __name__)
 
+# Каждый Blueprint имеет свои собственные маршруты (URLs), представления (views) и шаблоны. 
+# После регистрации в основном приложении эти маршруты становятся частью вашего основного приложения Flask.
 
 @lab3.route('/lab3/')
 def lab():
@@ -29,24 +31,27 @@ def cookie():
     resp.set_cookie('name_color', 'magenta')
     return resp
 
+# В Flask объект Response представляет собой HTTP-ответ, который сервер отправляет клиенту (браузеру). Этот объект 
+# содержит всю информацию об ответе: тело ответа 
+# (данные), заголовки, статусный код и прочие параметры, которые определяют, как сервер взаимодействует с клиентом
 
 @lab3.route('/lab3/del_cookie')
 def del_cookie():
-    resp = make_response(redirect ('/lab3/'))
+    resp = make_response(redirect ('/lab3/')) #Перенаправление говорит браузеру, что нужно перейти на страницу /lab3/ после установки куки
     resp.set_cookie('name')
     resp.set_cookie('age')
     resp.set_cookie('name_color')
     return resp
 
 @lab3.route('/lab3/form1')
-def form1():
+def form1(): #Эта функция обрабатывает GET-запрос и проверяет наличие параметров
 #     user = request.args.get('user')
 #     age = request.args.get('age')
 #     sex = request.args.get('sex')
 #     return render_template('lab3/form1.html', user=user, age=age, sex=sex)
 
     errors = {}
-    user = request.args.get('user')
+    user = request.args.get('user') #пытается получить параметр user из строки запроса (например, ?user=Alex). Если параметр не передан, будет возвращено значение None
     if user == '':
         errors['user'] = 'Заполните поле!'
     age = request.args.get('age')
@@ -54,6 +59,13 @@ def form1():
         errors['age'] = 'Введите возвраст!'
     sex = request.args.get('sex')
     return render_template('lab3/form1.html', user=user, age=age, sex=sex, errors=errors)
+
+# рендер для рендеринга (отображения) HTML-шаблонов и передачи в них данных.
+
+# request.args в Flask предназначен для доступа к параметрам строки запроса, которые передаются в URL после знака ?. 
+# Например, при запросе /lab3/form1?user=Alex&age=20 параметры user и age
+
+
 
 @lab3.route('/lab3/order')
 def order():
@@ -134,7 +146,7 @@ def ticket():
     destination = request.args.get('destination')
     travel_date = request.args.get('travel_date')
 
-    # Проверяем, что возраст не пуст и является числом
+    # Проверяем, что возраст не пуст и является числом. isdigit() — это встроенный метод строк в Python, который проверяет, состоит ли строка полностью из цифр.
     if not passenger_age_str or not passenger_age_str.isdigit():
         return "Ошибка: Возраст должен быть числом", 400
 
