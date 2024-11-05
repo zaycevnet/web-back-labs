@@ -3,8 +3,8 @@
 {% block lab %}Лабораторная работа 4{% endblock %}
 
 {% block main %}
-    {% if authorized %}
-        <h1>Добро пожаловать, {{login}}</h1>
+        {%if realname %}
+        <h1>Добро пожаловать, {{realname}}!</h1>
         <div>
             <form action="/lab4/logout" method="post">
                 <button>Выход</button>
@@ -17,11 +17,15 @@
         <form method="post">
             <div>
                 <label for="username">Пользователь:</label>
-                <input type="text" id="login" name="login">
+                {%if login%}
+            <input type="text" id="login" name="login" value='{{login}}' required>
+            {%else%}
+            <input type="text" id="login" name="login" value='{{login}}' required>
+            {%endif%}
             </div>
             <div>
                 <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" required>
             </div>
             <div>{{error}}</div>
             <div>
