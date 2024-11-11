@@ -100,11 +100,11 @@ def pow_op():
         x1 = int(x1)
         x2 = int(x2)
 
-        if x1 == 0 and x2 == 0:
-            raise ValueError("0  0 не определено")
+        if x1 == 0 and x2 == 0: #это ключевое слово, которое инициирует исключение.
+            raise ValueError("0  0 не определено") 
 
         result = x1 ** x2
-    except ValueError as e:
+    except ValueError as e: #для обработки исключений типа ValueError и позволяет получить к ним доступ, чтобы понять, что пошло не так. 
         return render_template('lab4/pow.html', x1=x1, x2=x2, result=None, error=str(e))
 
     return render_template('lab4/pow.html', x1=x1, x2=x2, result=result, error=None)
@@ -129,7 +129,7 @@ def tree():
     return render_template('lab4/tree.html', tree_count=tree_count)
 
 # Авторизация
-realname1 = ''
+realname1 = '' #хранит полное имя пользователя, чтобы можно было вывести его после авторизации
 users = [
     {'login': 'alex', 'password': '123', 'sex': 'male', 'realname': 'Алексей Иванов'},
     {'login': 'bob', 'password': '555','sex': 'male', 'realname': 'Боб Тотов'},
@@ -140,9 +140,9 @@ users = [
 @lab4.route('/lab4/login',methods =['GET','POST'])
 def login():
     if request.method == 'GET':
-        if 'login' in session:
+        if 'login' in session: #если пользователь уже авторизован
             authorized = True
-            login = session['login']
+            login = session['login'] #извлекает логин текущего пользователя.
             for user in users:
                 if login == user['login']:
                     global realname1
@@ -156,7 +156,7 @@ def login():
     login = request.form.get('login')
     password = request.form.get('password')
 
-    for user in users:
+    for user in users: #Если есть совпадение, логин сохраняется в session['login'], что создаёт сессию для пользователя
         if login == user['login'] and password == user['password']:
             session['login'] = login
             return redirect('/lab4/login')
@@ -166,7 +166,7 @@ def login():
 
 @lab4.route('/lab4/logout', methods=['POST'])
 def logout():
-    session.pop('login', None)
+    session.pop('login', None) #удаляет логин пользователя из сессии, что означает завершение авторизации
     return redirect('/lab4/login')
 
 
@@ -204,7 +204,7 @@ def order_grain():
             error = 'Ошибка: не введен вес'
             return render_template('ordergrain.html', error=error)
 
-        weight = float(weight)
+        weight = float(weight) #Конвертация веса в число
         price_per_ton = {
             'ячмень': 12345,
             'овёс': 8522,
