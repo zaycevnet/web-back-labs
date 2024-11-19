@@ -156,7 +156,7 @@ def edit_article(article_id):
     if current_app.config['DB_TYPE'] == 'postgres':
         cur.execute("SELECT * FROM articles WHERE id=%s AND user_id=%s;", (article_id, user_id))
     else:
-        cur.execute("SELECT * FROM articles WHERE id=? AND user_id=?;", (article_id, user_id))
+        cur.execute("SELECT * FROM articles WHERE id=? AND login_id=?;", (article_id, user_id))
     article = cur.fetchone()
 
     # Если статья не найдена или не принадлежит пользователю
@@ -200,7 +200,7 @@ def delete_article(article_id):
     if current_app.config['DB_TYPE'] == 'postgres':
         cur.execute("DELETE FROM articles WHERE id=%s AND user_id=%s;", (article_id, user_id))
     else:
-        cur.execute("DELETE FROM articles WHERE id=? AND user_id=?;", (article_id, user_id))
+        cur.execute("DELETE FROM articles WHERE id=? AND login_id=?;", (article_id, user_id))
     
     db_close(conn, cur)
     return redirect('/lab5/list')
