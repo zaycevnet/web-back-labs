@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {%block lab%}Лабораторная работа 5{%endblock%}
 
-
 {%block main%}
     <h1>Создание статьи</h1>
     <form action="/lab5/create" method="post">
         <div>
             <label>
                 Название статьи:
-                <input type="text" maxlength="50" name="title">
+                <input type="text" maxlength="50" name="title" required>
             </label>
         </div>
         <div>
-            <textarea name="article_text"></textarea>
+            <textarea name="article_text" required></textarea>
         </div>
         <button type="submit">Создать</button>
     </form>
+
+    {% if error %}
+    <div style="color: red;">{{ error }}</div>
+    {% endif %}
 {%endblock%}

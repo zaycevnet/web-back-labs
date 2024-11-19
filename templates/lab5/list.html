@@ -4,8 +4,24 @@
 
 {%block main%}
     <h1>Статьи</h1>
-    {%for article in articles%}
-        <h2>{{article['title']}}</h2>
-        <blockquote>{{article['article_text']}}</blockquote>
-    {%endfor%}
+    {% if articles %}
+        {%for article in articles%}
+            <h2>{{article['title']}}</h2>
+            <blockquote>{{article['article_text']}}</blockquote>
+
+            <!-- Форма для удаления статьи -->
+            <form action="/lab5/delete/{{ article['id'] }}" method="POST" style="display:inline;">
+                <button type="submit" class="button-link">Удалить</button>
+            </form>
+            
+            <!-- Форма для редактирования статьи -->
+            <form action="/lab5/edit/{{ article['id'] }}" method="GET" style="display:inline;">
+                <button type="submit" class="button-link">Редактировать</button>
+            </form>
+            
+        {%endfor%}
+    {% else %}
+        <p>У вас пока нет статей.</p>
+    {% endif %}
+    <a href="/lab5/">Вернуться назад</a>
 {%endblock%}
