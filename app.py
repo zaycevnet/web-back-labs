@@ -1,4 +1,5 @@
 from flask import Flask, url_for, session, redirect,  render_template #Эта функция как раз и отвечает за рендеринг шаблонов (создание html-текста для браузера):
+import os
 from lab1 import lab1
 from lab2 import lab2
 from lab3 import lab3
@@ -10,7 +11,9 @@ app.register_blueprint(lab2)
 app.register_blueprint(lab3)
 app.register_blueprint(lab4)
 app.register_blueprint(lab5)
-app.secret_key = 'пароль'
+# app.secret_key = 'пароль'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
+app.config['DB_TYPE'] = os.getenv('DB_TYPE', 'postgres')
 #генерирует URL-адреса для маршрутов, для перенаправления 
 
 
