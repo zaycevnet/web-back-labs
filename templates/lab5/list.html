@@ -7,18 +7,23 @@
     {% if articles %}
         {%for article in articles%}
             <h2>{{article['title']}}</h2>
-            <blockquote>{{article['article_text']}}</blockquote>
+            <blockquote>{{article['article_text']}}</blockquote> 
+            <!-- для отображения блоковых цитат -->
 
             <!-- Форма для удаления статьи -->
             <form action="/lab5/delete/{{ article['id'] }}" method="POST" style="display:inline;">
                 <button type="submit" class="button-link">Удалить</button>
             </form>
+            <!-- используется POST, так как операция удаления обычно требует подтверждения или изменения на сервере -->
             
             <!-- Форма для редактирования статьи -->
             <form action="/lab5/edit/{{ article['id'] }}" method="GET" style="display:inline;">
                 <button type="submit" class="button-link">Редактировать</button>
             </form>
-            
+
+            <!-- используется GET, потому что операция редактирования обычно не изменяет данные на сервере, 
+             а только запрашивает форму редактирования -->
+
         {%endfor%}
     {% else %}
         <p>У вас пока нет статей.</p>

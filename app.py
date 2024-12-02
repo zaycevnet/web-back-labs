@@ -5,15 +5,22 @@ from lab2 import lab2
 from lab3 import lab3
 from lab4 import lab4
 from lab5 import lab5
+from lab6 import lab6
 app = Flask(__name__)
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)
 app.register_blueprint(lab3)
 app.register_blueprint(lab4)
 app.register_blueprint(lab5)
+app.register_blueprint(lab6)
 # app.secret_key = 'пароль'
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
-app.config['DB_TYPE'] = os.getenv('DB_TYPE', 'postgres')
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет') #Устанавливает секретный ключ приложения, используемый для безопасности
+app.config['DB_TYPE'] = os.getenv('DB_TYPE', 'postgres') #Определяет используемую базу данных
+
+# Пытается получить переменную окружения SECRET_KEY с помощью метода os.environ.get.
+# Если SECRET_KEY не установлена в окружении, по умолчанию будет использовано значение 'секретно-секретный секрет'.
+
 #генерирует URL-адреса для маршрутов, для перенаправления 
 
 
@@ -64,6 +71,7 @@ def index():
                 <li><a href="/lab3/">Третья лабораторная</a></li>
                 <li><a href="/lab4/">Четвёртая лабораторная</a></li>
                 <li><a href="/lab5/">Пятая лабораторная</a></li>
+                <li><a href="/lab6/">Шестая лабораторная</a></li>
         </nav>
         <footer>
             <p>ФИО: 010595140</p>
