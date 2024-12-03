@@ -4,7 +4,7 @@ lab6 = Blueprint('lab6', __name__)
 
 offices = []
 for i in range(1,11):
-    offices.append({'number': i, 'tenant': ''})
+    offices.append({"number": i, "tenant": "", "price": 900+i%3})
 
 
 @lab6.route('/lab6/')
@@ -32,6 +32,27 @@ def api():
             }
         }
 
+    if data['method'] == 'price':
+        if not login:
+            return{
+                'jsonrpc': '2.0',
+                'error':{
+                'code': 1,
+                'message': 'Unauthorized'
+            },
+                'id': id
+            }
+        endprice = 0
+        for office in offices:
+            if office['tenant'] == login:
+                endprice = endprice+office['price']
+
+        return{
+            'jsonrpc': '2.0',
+            'endprice': endprice,
+            'id': id
+        }
+    
     if data['method'] == 'booking':
         office_number = data['params']
         for office in offices:
@@ -51,7 +72,43 @@ def api():
                     'result': 'succes',
                     'id': id
                 }
-
+    if data['method'] == 'cancellation':
+        office_number = data['params']
+        for office in offices:
+            if office['number'] == office_number:
+                if office['tenant'] == '':
+                    return {
+                        'jsonroc': '2.0',
+                        'error':{
+                            'code': 3,
+                            'message': 'Not booked'
+                        },
+                        'id': id
+                    }
+                if not login:
+                    return{
+                        'jsonrpc': '2.0',
+                        'error':{
+                        'code': 1,
+                        'message': 'Unauthorized'
+                    }
+                    }
+                if office['tenant'] != login:
+                    return{
+                        'jsonroc': '2.0',
+                        'error':{
+                            'code': 4,
+                            'message': 'You cannot'
+                        },
+                        'id': id
+                    }
+                office['tenant'] = ''
+                return {
+                    'jsonrpc': '2.0',
+                    'result': 'succes',
+                    'id': id
+                }
+            
     return {
         'jsonrpc': '2.0',
         'error':{
