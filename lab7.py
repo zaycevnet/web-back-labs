@@ -79,7 +79,7 @@ films = [
 
 @lab7.route('/lab7/rest-api/films/', methods=['GET'])
 def get_films():
-    return jsonify(films)
+    return jsonify(films) # Возвращает список фильмов в формате JSON
 
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['GET'])
@@ -92,14 +92,14 @@ def get_film(id):
 def gel_film(id):
     if id < 0 or id >= len(films):
         abort(404)
-    del films[id]
-    return '',204
+    del films[id] # Удаляет фильм с указанным ID из списка
+    return '',204 # Возвращает пустой ответ с HTTP-статусом 204 (успешно, без содержимого)
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['PUT'])
 def put_film(id):
     if id < 0 or id >= len(films):
         abort(404)
-    film = request.get_json()
+    film = request.get_json() # Получение данных фильма из тела запроса в формате JSON
     if not film['title'] and film['title_ru']:
         film['title'] = film['title_ru']  # Если оригинальное название пустое, используем русское
     if not film['description']:
@@ -114,7 +114,7 @@ def add_film():
         film['title'] = film['title_ru']  # Если оригинальное название пустое, используем русское
     if not film['description']:
         return {'description': 'Заполните описание'}, 400
-    new_id = len(films)
+    new_id = len(films) # Генерация нового ID для добавляемого фильма (длина текущего списка фильмов)
     film["id"] = new_id 
-    films.append(film)
-    return film
+    films.append(film)  # Добавление нового фильма в список
+    return film # Возвращает добавленный фильм в формате JSON
