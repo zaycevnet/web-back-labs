@@ -16,7 +16,7 @@
         <textarea id="article_text" name="article_text" rows="10" required>{{ article.article_text }}</textarea>
     </div>
 
-    <div>
+    <!-- <div>
         <label>
             <input type="checkbox" name="is_public" {% if article.is_public %}checked{% endif %}> Сделать публичной
         </label>
@@ -26,7 +26,7 @@
         <label>
             <input type="checkbox" name="is_favorite" {% if article.is_favorite %}checked{% endif %}> Добавить в избранное
         </label>
-    </div>
+    </div> -->
 
     <button type="submit">Сохранить изменения</button>
 </form>

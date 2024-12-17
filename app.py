@@ -1,6 +1,8 @@
 from flask import Flask, url_for, session, redirect,  render_template #Эта функция как раз и отвечает за рендеринг шаблонов (создание html-текста для браузера):
 import os
 from flask_sqlalchemy import SQLAlchemy
+from db.models import users
+from flask_login import LoginManager
 from db import db
 from os import path
 from lab1 import lab1
@@ -127,3 +129,13 @@ def internal_server_error(err):
 </html>
 ''', 500
 
+# from flask_migrate import Migrate
+
+login_manager = LoginManager()
+login_manager.login_view = 'lab8.login'
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_users(login_id):
+    return users.query.get(int(login_id))
