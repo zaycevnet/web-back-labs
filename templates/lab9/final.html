@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block main %}
+<style>
+    /* Общие стили */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background-image: url('https://avatars.mds.yandex.net/i?id=74f73921f4f0c7ebc78ff793d0a12b24_l-5131410-images-thumbs&n=13');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: green;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+</style>
+
+    <h1>Поздравление</h1>
+    <p>{{ message }}</p>
+    <img src="{{ url_for('static', filename='images/' + image) }}" alt="Поздравление">
+    <br><br>
+    <!-- <a href="/lab9">Снова пройти тест</a> -->
+    <a href="{{ url_for('lab9.reset') }}">
+        <button type="button">Сбросить данные</button>
+    </a>
+{% endblock %}

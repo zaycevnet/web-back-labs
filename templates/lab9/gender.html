@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+<style>
+    /* Общие стили */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background-image: url('https://avatars.mds.yandex.net/i?id=74f73921f4f0c7ebc78ff793d0a12b24_l-5131410-images-thumbs&n=13');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: green;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+</style>
+    <h1>Кто вы?</h1>
+    <form method="POST" action="{{ url_for('lab9.gender', name=name, age=age) }}">
+        <button type="submit" name="gender" value="male">Мужчина</button>
+        <button type="submit" name="gender" value="female">Женщина</button>
+    </form>
+{% endblock %}
