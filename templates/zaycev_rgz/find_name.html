@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block lab %}РГЗ{% endblock %}
+
+{% block main %}
+    <div style="border: 1px solid black; padding: 3px; width: 300px; padding-left: 100px; font-size: 20px; background-color:rgb(133, 177, 177)">
+        <form action="/zaycev_rgz/find_emp2" method="post">
+            <label>Что искать?:</label><br>
+
+
+            <input type="text" name="name" required><br>
+            <label>Где искать?:</label><br>
+            <input type="radio" name="where" value="full_name" checked> ФИО <br>
+            <input type="radio" name="where" value="position"> Должность <br>
+            <input type="radio" name="where" value="phone"> Телефон <br>
+            <input type="radio" name="where" value="email"> Почта <br>
+
+            <label>Доп сведенья</label><br>
+            <label>Пол:</label><br>
+            <input type="radio" name="sex" id="sex" value="Мужской">Мужской<br>
+            <input type="radio" name="sex" id="sex" value="Женский">Женский<br>
+            <input type="radio" name="sex" id="sex" value="no" checked>Неважно<br>
+
+            <label>Испытательный строк:</label><br>
+            <input type="radio" name="isp" id="isp" value="true">Есть<br>
+            <input type="radio" name="isp" id="isp" value="false">Нету<br>
+            <input type="radio" name="isp" id="isp" value="no" checked>Неважно<br>
+
+
+            <label>Как отсартировать?:</label><br>
+            <input type="radio" name="where2" value="full_name"> ФИО <br>
+            <input type="radio" name="where2" value="position"> Должность <br>
+            <input type="radio" name="where2" value="probationary_period"> Статус периода <br>
+            <input type="radio" name="where2" value="gender"> Пол <br>
+            <input type="radio" name="where2" value="phone"> Телефон <br>
+            <input type="radio" name="where2" value="email"> Почта <br>
+            <input type="radio" name="where2" value="hire_date"> Дата <br>
+            <button type="submit">Искать</button>
+        </form>
+
+        <form action="/zaycev_rgz">
+            <button type="submit">Отмена</button>
+        </form>
+    </div>
+{% endblock %}

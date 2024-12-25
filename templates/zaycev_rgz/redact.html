@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block lab %}РГЗ{% endblock %}
+
+{% block main %}
+    <form action="/zaycev_rgz/redact" method="post">
+        <label>Ф.И.О.:</label><br>
+        <input type="text" name="full_name" value="{{employee.full_name}}"><br>
+        
+        <label>Должность:</label><br>
+        <input type="text" name='position' value="{{employee.position}}"><br>
+        
+        {% if employee.gender == "Мужской" %}
+            <input type="radio" name="sex" id='sex1' value="Мужской" checked><label for="sex1">Мужской</label><br>
+            <input type="radio" name="sex" id='sex2' value="Женский"><label for="sex2">Женский</label><br>
+        {% else %}
+            <input type="radio" name="sex" id='sex1' value="Мужской"><label for="sex1">Мужской</label><br>
+            <input type="radio" name="sex" id='sex2' value="Женский" checked><label for="sex2">Женский</label><br>
+        {% endif %}
+        
+        <label>Телефон:</label><br>
+        <input type="text" name='phone' value="{{employee.phone}}"><br>
+        
+        <label>Почта:</label><br>
+        <input type="text" name="email" value="{{employee.email}}"><br>
+        
+        <label>Испытательный срок:</label><br>
+        {% if employee.probationary_period %}
+            <input type="radio" name="prob" id='prob1' value="true" checked><label for="prob1">Да</label><br>
+            <input type="radio" name="prob" id='prob2' value="false"><label for="prob2">Нет</label><br>
+        {% else %}
+            <input type="radio" name="prob" id='prob1' value="true"><label for="prob1">Да</label><br>
+            <input type="radio" name="prob" id='prob2' value="false" checked><label for="prob2">Нет</label><br>
+        {% endif %}
+        
+        <label>Дата устройства:</label><br>
+        <input type="date" name='data' value="{{employee.hire_date}}"><br>
+        
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit">Редактировать</button>
+    </form>
+    <form action="/zaycev_rgz">
+        <button type="submit">Отмена</button>
+    </form>
+{% endblock %}

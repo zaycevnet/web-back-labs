@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block lab %}РГЗ{% endblock %}
+
+{% block main %}
+    <form action="/zaycev_rgz/new_emp" method="post" style="border: 1px solid black; padding: 3px; width: 300px; padding-left: 100px; font-size: 20px; background-color:rgb(133, 177, 177)">
+        <label>Ф.И.О.:</label><br>
+        <input type="text" name="full_name" required><br>
+        
+        <label>Должность:</label><br>
+        <input type="text" name='position' required><br>
+        
+        <input type="radio" name="sex" id='sex1' value="Мужской" checked><label for="sex1">Мужской</label><br>
+        <input type="radio" name="sex" id='sex2' value="Женский"><label for="sex2">Женский</label><br>
+        
+        <label>Телефон:</label><br>
+        <input type="text" name='phone' required><br>
+        
+        <label>Почта:</label><br>
+        <input type="text" name="email" required><br>
+        
+        <label>Испытательный срок:</label><br>
+        <input type="radio" name="prob" id='prob1' value="true" checked><label for="prob1">Да</label><br>
+        <input type="radio" name="prob" id='prob2' value="false"><label for="prob2">Нет</label><br>
+        
+        <label>Дата устройства:</label><br>
+        <input type="date" name='data' required><br>
+        <button type="submit">Добавить</button>
+    </form>
+    <form action="/zaycev_rgz">
+        <button type="submit">Отмена</button>
+    </form>
+{% endblock %}

@@ -14,6 +14,7 @@ from lab6 import lab6
 from lab7 import lab7
 from lab8 import lab8
 from lab9 import lab9
+from zaycev_rgz import zaycev_rgz
 app = Flask(__name__)
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)
@@ -24,6 +25,7 @@ app.register_blueprint(lab6)
 app.register_blueprint(lab7)
 app.register_blueprint(lab8)
 app.register_blueprint(lab9)
+app.register_blueprint(zaycev_rgz)
 # app.secret_key = 'пароль'
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет') #Устанавливает секретный ключ приложения, используемый для безопасности
@@ -42,13 +44,14 @@ if app.config['DB_TYPE'] == 'postgres':
     host_port = 5432
     options="-c client_encoding=UTF8"
 
+    # Формирование строки подключения для PostgreSQL
     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_password}@{host_ip}:{host_port}/{db_name}'
 else:
-    dir_path = path.dirname(path.realpath(__file__))
-    db_path = path.join(dir_path, "ser.db")
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+    dir_path = path.dirname(path.realpath(__file__)) # Получаем текущую директорию файла
+    db_path = path.join(dir_path, "ser.db")  # Формируем путь к файлу SQLite базы данных
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}' # Формирование строки подключения для SQLite
 
-db.init_app(app)
+db.init_app(app) # Инициализация базы данных с текущим приложением Flask
 
 @app.errorhandler(404)
 def not_found(err):

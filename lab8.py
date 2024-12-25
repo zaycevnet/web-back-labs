@@ -75,7 +75,7 @@ def register():
     password_form = request.form.get('password')
 
     # Проверяем, существует ли пользователь с таким логином
-    login_exists = users.query.filter_by(login=login_form).first()
+    login_exists = users.query.filter_by(login=login_form).first() #SELECT * FROM users WHERE login = :login LIMIT 1
     if login_exists:
         return render_template('lab8/register.html', error = 'Такой пользователь уже существует')
     

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{%block lab%}РГЗ{%endblock%}
+
+
+{%block main%}
+{%if error1%}
+{{error1}}
+{%else%}
+{%endif%}
+{% if employees %}
+{%if name%}
+<span style="font-size: 40px;">Поиск по <span style="color: rgb(93, 10, 248);">{{name}}</span></span>
+{%else%}
+{%endif%}
+<table>
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Должность</th>
+            <th>Пол</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Испытательный срок</th>
+            <th>Дата устройства</th>
+            {%if login%}
+            <th colspan="2">Функции</th>
+            {%else%}
+            {%endif%}
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees[:20] %}
+            <tr>
+                <td>{{employee.full_name }}</td>
+                <td>{{employee.position }}</td>
+                <td>{{employee.gender }}</td>
+                <td>{{employee.phone }}</td>
+                <td>{{employee.email }}</td>
+                <td>{{'Да' if employee.probationary_period == "true" else 'Нет' }}</td>
+                <td>{{employee.hire_date}}</td>
+                {%if login%}
+                <td><form action="/zaycev_rgz/delete">
+                    <input type="hidden" name="list" value="full">
+                    <input type="hidden" name="id" value="{{employee.id}}">
+                    <button type="submit">Удалить</button>
+                </form></td>
+                <td><form action="/zaycev_rgz/redact_{{employee.id}}", method="post">
+                    <button type="submit">Редактировать</button>
+                </form></td>
+                {%else%}
+                {%endif%}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{%if login%}
+<form action="/zaycev_rgz/new" method="post" style="position: absolute; right: 100px; top: 230px;">
+    <button style="width: 200px; height: 40px; font-size: 18px">Добавить сотрудника</button>
+</form>
+{%else%}
+{%endif%}
+<form action="/zaycev_rgz/find_emp" style="position: absolute; right: 100px; top: 400px;">
+    <button style="width: 200px; height: 40px; font-size: 18px">Искать сотрудника</button>
+</form>
+
+{% else %}
+<p>Список сотрудников пуст.</p>
+{% endif %}
+{%if name%}
+    <form action="/zaycev_rgz">
+        <button type="submit">Сбросить</button>
+    </form>
+{%else%}
+{%endif%}
+{% if employees|length > 20 %}
+    {%if name%}
+    <form action="/zaycev_rgz/full" method="post" style="margin-bottom: 30px;">
+        <input type="hidden" value="{{name}}" name="name">
+        <input type="hidden" value="{{where}}" name="where">
+        <input type="hidden" value="{{where2}}" name="where2">
+        <input type="hidden" value="{{sex}}" name="sex">
+        <input type="hidden" value="{{isp}}" name="isp">
+        <button type="submit">Загрузить всех</button>
+    </form>
+    {%else%}
+    <form action="/zaycev_rgz/full" method="get" style="margin-bottom: 30px;">
+        <button type="submit">Загрузить всех</button>
+    </form>
+    {%endif%}
+{%else%}
+{%endif%}
+    {%if login%}
+    <div style="position: absolute; top: 20px; right: 100px;">
+        <span style="font-size: 25px;">Админ понель активирована!</span>
+        <form action="/zaycev_rgz/logout" method="post">
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+    {%else%}
+    <div style="position: absolute; top: 20px; right: 100px; width: 350px; height: 200px; border: 1px solid black; border-radius: 6px; background-color: grey">
+        <form action="/zaycev_rgz/login" method="post">
+            <label style="font-size: 20px; margin-left: 120px">Логин:</label><br>
+            <input type="text" name="login" required style="font-size: 20px; margin-left: 50px"><br>
+            <label style="font-size: 20px; margin-left: 120px">Пароль:</label><br>
+            <input type="text" name="password" required style="font-size: 20px; margin-left: 50px"><br>
+            <button type="submit" style="margin-left: 240px; margin-top: 30px ">Войти</button>
+            {%if error%}
+            {{error}}
+            {%else%}
+            {%endif%}
+    </div>
+    </form>
+    {%endif%}
+{%endblock%}
